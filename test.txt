@@ -1,0 +1,2 @@
+texto para teste da funçao
+get_next_line com bues cenas
