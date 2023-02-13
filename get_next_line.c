@@ -6,7 +6,7 @@
 /*   By: fpinho-d <fpinho-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 13:34:36 by fpinho-d          #+#    #+#             */
-/*   Updated: 2023/02/13 19:16:47 by fpinho-d         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:48:29 by fpinho-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*printar_nova_linha(char *str_antiga)
 		free (str_antiga);
 		return (NULL);
 	}
-	str_nova = (char *) malloc (sizeof(char) * (ft_strlen(str_antiga) - i + 1));
+	str_nova = (char *) malloc(sizeof(char) * (ft_strlen(str_antiga) - i + 1));
 	if (!str_nova)
 		return (NULL);
 	i++;
@@ -105,13 +105,12 @@ char	*get_next_line(int fd)
 	return (str_parcial);
 }
 
-int main()
+int	main()
 {
-	int fd;
-	size_t lines;
-
-	fd = open ("test.txt", O_RDONLY);
+	int	fd;
+	size_t	lines;
+	fd = open("test.txt", O_RDONLY);
 	lines = 4;
-	while (lines -- != 0)
-	printf("%s", get_next_line(fd));
+	while (lines-- != 0)
+		printf("%s", get_next_line(fd));	
 }
