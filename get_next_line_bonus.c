@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fpinho-d <fpinho-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 13:34:36 by fpinho-d          #+#    #+#             */
-/*   Updated: 2023/02/16 17:09:37 by fpinho-d         ###   ########.fr       */
+/*   Created: 2023/02/16 16:38:03 by fpinho-d          #+#    #+#             */
+/*   Updated: 2023/02/16 17:12:49 by fpinho-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*printar_nova_linha(char *str_antiga);
 char	*ler_ficheiro_e_printar_str(int fd, char *str_toda);
@@ -20,30 +20,29 @@ char	*passar_total_para_parcial(char *str_toda);
 int	main()
 {
 	int	fd;
-	char *line;
+	int another_fd;
+	//char *line;
 
 	fd = open("teste.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-}
+	anotherfd = open("teste2.txt", O_RDONLY);
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(another_fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(another_fd));
+} */
 
- */
 char	*get_next_line(int fd)
 {
-	static char	*str_toda;
+	static char	*str_toda[4096];
 	char		*str_parcial;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str_toda = ler_ficheiro_e_printar_str(fd, str_toda);
-	if (!str_toda)
+	str_toda[fd] = ler_ficheiro_e_printar_str(fd, str_toda[fd]);
+	if (!str_toda[fd])
 		return (NULL);
-	str_parcial = passar_total_para_parcial(str_toda);
-	str_toda = printar_nova_linha(str_toda);
+	str_parcial = passar_total_para_parcial(str_toda[fd]);
+	str_toda[fd] = printar_nova_linha(str_toda[fd]);
 	return (str_parcial);
 }
 
